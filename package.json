@@ -4,8 +4,8 @@
   "description": "",
   "main": "dijkstra.js",
   "scripts": {
-    "test": "./node_modules/.bin/nyc --reporter=text --reporter=lcov -- mocha dijkstra.spec.js",
-    "test-watch": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/nyc --reporter=text --reporter=lcov -- mocha dijkstra.spec.js"
+    "test": "./node_modules/.bin/nyc --reporter=text --reporter=lcov -- mocha test/dijkstra.spec.js",
+    "test-watch": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/nyc --reporter=text --reporter=lcov -- mocha test/dijkstra.spec.js"
   },
   "author": "",
   "license": "ISC",
