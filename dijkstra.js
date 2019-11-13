@@ -13,6 +13,8 @@ class Node {
    * @param {Array<Path>} paths
    */
   constructor (name, paths = []) {
+    /** @member {Boolean} */
+    this.visited = false
     /** @member {String} */
     this.name = name
     /** @member {Array<Path>} paths */
