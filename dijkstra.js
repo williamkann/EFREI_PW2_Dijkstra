@@ -15,7 +15,7 @@ class Node {
   constructor (name, paths = []) {
     /** @member {String} */
     this.name = name
-    /** @member {Array<Link>} paths */
+    /** @member {Array<Path>} paths */
     this.paths = paths
     /** @member {Number} totalCost */
     this.distance = Infinity
