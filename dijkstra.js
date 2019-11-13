@@ -13,13 +13,13 @@ class Node {
    * @param {Array<Path>} paths
    */
   constructor (name, paths = []) {
-    /** @member {Boolean} */
+    /** @member {Boolean} visited */
     this.visited = false
-    /** @member {String} */
+    /** @member {String} name */
     this.name = name
     /** @member {Array<Path>} paths */
     this.paths = paths
-    /** @member {Number} totalCost */
+    /** @member {Number} distance */
     this.distance = Infinity
     /** @member {Node} visitedFrom */
     this.visitedFrom = null
