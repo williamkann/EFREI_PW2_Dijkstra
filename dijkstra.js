@@ -1,16 +1,19 @@
 class Path {
-  constructor (cost, node) {
+  constructor (cost, node, moreinfo) {
     /** @member {Number} cost */
     this.cost = cost
     /** @member {Node} node */
     this.node = node
+    // arbitrary field that you can add to debug your code
+    /** @member {Object} moreinfo */
+    this.moreinfo = moreinfo
   }
 }
 
 class Node {
   /**
    * @param {String} name
-   * @param {Array<Path>} paths
+   * @param {Path[]} paths
    */
   constructor (name, paths = []) {
     /** @member {Boolean} visited */
@@ -28,18 +31,19 @@ class Node {
   /**
    * @param {Node} node
    * @param {Number} cost
+   * @param {Object} [moreinfo]
    */
-  addOrientedPath (node, cost) {
+  addOrientedPath (node, cost, moreinfo) {
     const current = this.paths.findIndex(n => n.node === node)
     if (current !== -1) {
       this.paths.splice(current, 1)
     }
-    this.paths.push(new Path(cost, node))
+    this.paths.push(new Path(cost, node, moreinfo))
   }
 
   /**
    * @param {Node} node
-   * @param {Number} cost
+   * @param {Function} cost
    */
   addNonOrientedPath (node, cost) {
     this.addOrientedPath(node, cost)
@@ -50,7 +54,7 @@ class Node {
    * Calculates the new distance for each node
    * Already visited nodes shouldn't be updated
    * The {@link Node}s returned are the nodes which were never calculated before
-   * @returns {Node[]|null}
+   * @returns {Node[]}
    */
   calcNeighboursTentativeDistance () {
   }
@@ -62,9 +66,9 @@ class Dijkstra {
    * that we need to go through to have the path
    * @param {Node} startNode
    * @param {Node} endNode
-   * @returns {Array<Node>}
+   * @returns {Promise<Node[]>}
    */
-  static shortestPathFirst (startNode, endNode) {
+  static async shortestPathFirst (startNode, endNode) {
   }
 
   /**
