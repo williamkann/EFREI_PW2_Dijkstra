@@ -66,9 +66,9 @@ class Dijkstra {
    * that we need to go through to have the path
    * @param {Node} startNode
    * @param {Node} endNode
-   * @returns {Promise<Node[]>}
+   * @returns {Node[]}
    */
-  static async shortestPathFirst (startNode, endNode) {
+  static shortestPathFirst (startNode, endNode) {
   }
 
   /**
