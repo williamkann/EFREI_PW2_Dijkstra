@@ -57,6 +57,27 @@ class Node {
    * @returns {Node[]}
    */
   calcNeighboursTentativeDistance () {
+    const self = this
+    // Display startNode informations
+    console.log(`We are at the node ${this.name}`)
+
+    var newUnvisitedNodes = []
+    this.paths.forEach(path => {
+      if (path.node.visited === false) {
+        console.log('\x1b[33m%s\x1b[0m', `Visiting neighbour : ${path.node.name}`)
+        // should update not-visited neighbours which current distance is higher than the newly calculated one
+        console.log('\x1b[33m%s\x1b[0m', `We compare ${path.node.distance} and ${this.distance + path.cost}`)
+        if (path.node.distance > (this.distance + path.cost)) {
+          if (path.node.distance === Infinity) {
+            newUnvisitedNodes.push(path.node)
+          }
+          path.node.distance = this.distance + path.cost
+          path.node.visitedFrom = self
+        }
+      }
+    })
+    console.log('NEW CALCULATED NODE : ', newUnvisitedNodes)
+    return newUnvisitedNodes
   }
 }
 
@@ -69,6 +90,32 @@ class Dijkstra {
    * @returns {Node[]}
    */
   static shortestPathFirst (startNode, endNode) {
+    if (startNode === endNode) {
+      console.log('StartNode === EndNode')
+      return []
+    }
+
+    // Set the distance value of startNode to 0
+    startNode.distance = 0
+    startNode.visited = true
+    console.log(`StartNode: ${startNode.name} | Distance : ${startNode.distance} | Visited : ${startNode.visited}`)
+
+    let currNode = startNode
+    let result = []
+    while (currNode !== endNode) {
+      result = [...result, ...currNode.calcNeighboursTentativeDistance()]
+
+      // Get the smallest distance
+      result.sort((a, b) => {
+        return a.distance - b.distance
+      })
+
+      currNode = result.shift()
+      currNode.visited = true
+      console.log('WE CHOOSE THE NODE : ', currNode)
+    }
+
+    return this.generatePath(endNode)
   }
 
   /**
@@ -79,6 +126,14 @@ class Dijkstra {
    * @returns {Node[]}
    */
   static generatePath (endNode) {
+    var arrayPath = []
+    arrayPath.unshift(endNode)
+    while (endNode.visitedFrom !== null) {
+      endNode = endNode.visitedFrom
+      arrayPath.unshift(endNode)
+    }
+    this.printPath(arrayPath)
+    return arrayPath
   }
 
   /**

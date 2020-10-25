@@ -186,8 +186,6 @@ describe('Dijkstra', () => {
       const { startNode, endNode, nodes } = fixtureGenerator()
 
       const result = Dijkstra.shortestPathFirst(startNode, endNode)
-      // Dijkstra.printPath(result)
-
       expect(result).to.be.an('array').of.length(3)
       expect(result[0].name).to.equal(startNode.name)
       expect(result[1].name).to.equal(nodes[1][2].name)
